@@ -69,7 +69,7 @@ Example:
     get_state(fan) returns ("Holmes", True, 3)
 More test cases in main() method
 """
-def get_state(fan):
+def get_state(fan): # Not required according to Professor Kshteri.
     return (fan.brand, fan.is_on, fan.speed)
 
 
