@@ -1,5 +1,5 @@
-import node_stack
-
+#import node_stack
+from dict_queue import *
 """
 Course: GCIS 123 (2251)
 Exam: Final Exam
@@ -22,12 +22,35 @@ For credit your function must use a stack or a queue in a significant way.
     implementation must run in linear time.
 """
 
+# I am sure this isn't linear time; Saving you some time here.
 def even_digits(integer):
-    pass # please replace with your solution
+    digit_queue = Queue()
+    mod_slot = 10 # Singling out each digit
+    difference = 0 #Used to subtract numbers in lower places (ex: 17 - 7 = 10)
+    while True:
+        try:
+            difference += digit_queue.back()
+        except IndexError: # Throws an IndexError @ the ones place (queue MT)
+            pass
+        digit_queue.enqueue(((integer-difference)%mod_slot))
+        mod_slot *= 10
+        if integer % mod_slot == integer: break # Not the greatest case to break a loop but the next line of code ensures each numerical place is queued.
+    digit_queue.enqueue(integer-(digit_queue.back()+difference))
 
+    final_number = 0 #What is returned
+    tens_place = 1 #How it gets returned as a digit post-even check
+    while len(digit_queue) > 0:
+        current_num = digit_queue.dequeue()
+        while current_num >= 10:
+            current_num /= 10
 
-
-
+        if int(current_num) % 2 == 0: 
+            final_number += current_num * tens_place #Because there would be extra 0's if I just added 4000 to 20 from '4321'
+            tens_place *= 10
+        
+    return(int(final_number))
+        
+    
 
 # several test cases provided for even digits - 1, 2, 34, 1234567890
 def test_even_digits_1():
