@@ -22,7 +22,6 @@ For credit your function must use a stack or a queue in a significant way.
     implementation must run in linear time.
 """
 
-# I am sure this isn't linear time; Saving you some time here.
 def even_digits(integer):
     digit_queue = Queue()
     mod_slot = 10 # Singling out each digit
@@ -37,7 +36,7 @@ def even_digits(integer):
         if integer % mod_slot == integer: break # Not the greatest case to break a loop but the next line of code ensures each numerical place is queued.
     digit_queue.enqueue(integer-(digit_queue.back()+difference))
 
-    final_number = 0 #What is returned
+    final_number = 0 # Return Variable
     tens_place = 1 #How it gets returned as a digit post-even check
     while len(digit_queue) > 0:
         current_num = digit_queue.dequeue()
@@ -45,7 +44,7 @@ def even_digits(integer):
             current_num /= 10
 
         if int(current_num) % 2 == 0: 
-            final_number += current_num * tens_place #Because there would be extra 0's if I just added 4000 to 20 from '4321'
+            final_number += current_num * tens_place
             tens_place *= 10
         
     return(int(final_number))
